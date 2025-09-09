@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Awesome library link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google fonts | 3 font family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="styles.css">
+    <title>Twimba - Tweet </title>
+</head>
+<body>
+    <div class="main-container">
+        <header class="logo">Twimba</header>
+        <main>
+            <section class="post-tweet-section">
+                <div class="current-user">
+                    <img 
+                        src="./images/captainamerica.jpeg" 
+                        alt="" 
+                        loading="lazy" 
+                        class="profile-pic"
+                        >
+                    <input type="text" placeholder="What's happening?" class="tweet-input" id="tweet-input" autocomplete="off">
+                </div>
+                <button id="tweet-btn" class="tweet-btn" type="button">Tweet</button>
+            </section>
+            <!-- Tweets and comments -->
+            <section id="tweets-and-comments-container">
+                <!-- tweets cont start -->
+                <div id="tweets-container">
+                    <!-- <div class="tweet-container">
+                        <div class="tweet-user-info">
+                            <img src="./images/deadpool.jpeg" alt="" class="profile-pic">
+                            <p class="handle-p">@johnwick007</p>
+                        </div>
+                        <div class="tweet-feed">
+                            <p class="tweet">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus consequatur laboriosam officia facilis fuga iusto, incidunt amet nihil nostrum sed pariatur eius repellendus doloribus architecto voluptas ea veniam alias quidem.</p>
+                            <div class="tweet-feedback">
+                                <span><i class="fa-regular fa-comment-dots"></i>50</span>
+                                <span><i class="fa-solid fa-heart"></i>234</span>
+                                <span><i class="fa-solid fa-retweet"></i>33</span>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- tweet cont end -->
+                 <!-- comment cont start -->
+                <div id="comments-container">
+                     <!-- <div class="comment-container">
+                        <div class="tweet-user-info">
+                            <img src="./images/johnwick.jpeg" alt="" class="profile-pic">
+                            <p class="handle-p">@deadpool</p>
+                        </div>
+                        <div class="tweet-feed">
+                            <p class="tweet">Auditions closed. Try the X-Men… they take anyone.</p>
+                            <div class="tweet-feedback">
+                                <span><i class="fa-solid fa-heart liked"></i>333s</span>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- comment cont end -->
+            </section>
+        </main>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

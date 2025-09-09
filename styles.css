@@ -1,0 +1,215 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color: #2a2a2a;
+    --font-color: whitesmoke;
+}
+
+body {
+    max-width: 100vw;
+    width: 100%;
+}
+
+.main-container {
+    margin: auto;
+    width: 450px;
+    padding: 1em 1.5em;
+    background-color: var(--background-color);
+}
+
+/* Header & Tweet input styling */
+
+.post-tweet-section {
+    /* background-color: gray; */
+}
+
+.current-user {
+    display: flex;
+    gap: 1em;
+}
+
+.logo {
+    color: #1DA1F2;
+    font-family: "Permanent Marker", cursive;
+    font-size: 2rem;
+    margin-bottom: 0.4em;
+}
+
+.profile-pic {
+    width: 50px;
+    border-radius: 50%;
+    border: 0.5px solid white;
+    /* filter: drop-shadow(0 2px 2px rgba(255,255,255,0.2)); */
+}
+
+.tweet-input {
+    font-family: "Noto Sans", sans-serif;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    width: 100%;
+    color: var(--font-color);
+}
+
+.tweet-btn {
+    background-color: #1DA1F2;
+    width: 100%;
+    padding: 0.7em 1.5em;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--font-color);
+    font-size: 1.2rem;
+    margin-top: 1.8em;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.tweet-btn:hover,
+.tweet-btn:focus {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.tweet-btn:active {
+    scale: 0.97;
+}
+
+/* Tweets styling */
+.tweet-container {
+    /* background-color: gray; */
+    color: var(--font-color);
+    border-top: 1px solid gray;
+    margin-top: 1em;
+    padding-top: 1em;
+}
+
+.handle-p {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 0.9rem;
+}
+
+.tweet-feed {
+    margin-left: 3.7em;
+}
+
+.tweet {
+    font-family: "Noto Sans", sans-serif;
+    transform: translateY(-19px);
+}
+
+.tweet-user-info {
+    display: flex;
+    gap: 0.5em;
+}
+
+.tweet-feedback {
+    display: flex;
+    gap: 4em;
+}
+
+.tweet-feedback span {
+    font-family: "Noto Sans", sans-serif;
+    font-size: 0.9rem;
+}
+
+.tweet-feedback span i {
+    font-size: 1rem;
+    margin-right: 0.2em;
+}
+
+.tweet-feedback span i:hover,
+.tweet-feedback span i:focus {
+    cursor: pointer;
+}
+
+.fa-heart {
+    color: gray;
+}
+
+.fa-trash {
+    color: gray;
+    transition: color 1s ease;
+}
+
+.fa-trash:hover, 
+.fa-trash:focus {
+    color: rgb(245, 84, 84);
+}
+
+.liked {
+    color: red;
+}
+
+.retweeted {
+    color:  #19cf86;
+}
+
+.hide {
+    display: none;
+}
+
+.comment {
+    width: 85%;
+    margin-left: auto;
+    margin-top: 1.3em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.comment-input {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    outline: none;
+    width: 210px;
+    border-radius: 10px;
+    padding: 0.7em 1em;
+    font-family: "Noto Sans", sans-serif;
+    color: var(--font-color);
+}
+
+#comment-post-btn {
+    background-color: #1DA1F2;
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: all 1s ease;
+}
+
+#comment-post-btn i {
+    position: absolute;
+    top: 27%;
+    left: 19%;
+    font-size: 1rem;
+    transform: rotate(45deg);
+}
+
+#comment-post-btn:hover,
+#comment-post-btn:focus {
+    background-color: var(--font-color);
+    color: #1DA1F2;
+}
+
+#comment-post-btn:active {
+    scale: 0.8;
+}
+
+.comment-container {
+    width: 85%;
+    margin-left: auto;
+    color: var(--font-color);
+    border-top: 1px solid gray;
+    margin-top: 1em;
+    padding-top: 1em;
+}
