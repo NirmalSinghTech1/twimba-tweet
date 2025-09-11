@@ -153,6 +153,10 @@ body {
     color:  #19cf86;
 }
 
+.comment-section {
+    /* display: none; */
+}
+
 .hide {
     display: none;
 }
