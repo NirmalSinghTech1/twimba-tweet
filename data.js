@@ -1,7 +1,7 @@
 export const tweetData = [
     {
         handle: "@johnwick 🔫",
-        profilePic: "johnwick.jpeg",
+        profilePic: "johnwick.webp",
         likes: 180,
         retweets: 83,
         tweetText: "Today, I finished one gang with just pencil. funny ha! ha!",
@@ -13,14 +13,14 @@ export const tweetData = [
     },
     {
         handle: "@deadpool ⚔",
-        profilePic: "deadpool.jpeg",
+        profilePic: "deadpool.webp",
         likes: 230,
         retweets: 145,
         tweetText: "Just found out I'm not in the next Avengers movie. Again. Seriously, Tony? Still not over that. Give me my shot, you billionaire douche. #AvengersAssemble #OrDont #MoreLikeAvengersDisassemble",
         replied: [
             {
                 handle: "@Tonystark",
-                profilePic: "ironman.jpeg",
+                profilePic: "ironman.webp",
                 isLiked: false,
                 likes: 250,
                 isCommented: false,
@@ -29,7 +29,7 @@ export const tweetData = [
             }, 
             {
                 handle: "@peterparker",
-                profilePic: "spiderman.jpeg",
+                profilePic: "spiderman.webp",
                 isLiked: false,
                 likes: 100,
                 isCommented: false,
@@ -44,14 +44,14 @@ export const tweetData = [
     },
     {
         handle: "@wolverine 🔪",
-        profilePic: "wolverine.jpeg",
+        profilePic: "wolverine.webp",
         likes: 102,
         retweets: 67,
         tweetText: `Anyone stands in my way, they won't be standin' much longer," and "I'm the best there is at what I do, but what I do isn't very nice`,
         replied: [
             {
                 handle: "@deadpool ⚔",
-                profilePic: "deadpool.jpeg",
+                profilePic: "deadpool.webp",
                 likes: 40,
                 isCommented: false,
                 tweetText: "Not nice? Bro, neither is your haircut. ✂️🐺",

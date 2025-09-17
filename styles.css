@@ -1,3 +1,25 @@
+@font-face {
+    font-family: "Permanent Marker";
+    src: url("./fonts/permanentmarker-regular-webfont.woff2") format("woff2");
+    src: url("./fonts/permanentmarker-regular-webfont.woff") format("woff");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Noto Sans", sans-serif;;
+    src: url("./fonts/notosans-variablefont_wdthwght-webfont.woff2") format("woff2");
+    src: url("./fonts/notosans-variablefont_wdthwght-webfont.woff") format("woff");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Noto Sans", sans-serif;;
+    src: url("./fonts/notosans-variablefont_wdthwght-webfont.woff2") format("woff2");
+    src: url("./fonts/notosans-variablefont_wdthwght-webfont.woff") format("woff");
+    font-weight: 600;
+    font-display: swap;
+}
+
+
 * {
     padding: 0;
     margin: 0;
@@ -22,10 +44,6 @@ body {
 }
 
 /* Header & Tweet input styling */
-
-.post-tweet-section {
-    /* background-color: gray; */
-}
 
 .current-user {
     display: flex;
@@ -64,8 +82,8 @@ body {
     border-radius: 30px;
     border: none;
     outline: none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
+    font-family: "Noto Sans", sans-serif;   
+    font-weight: 600;
     color: var(--font-color);
     font-size: 1.2rem;
     margin-top: 1.8em;
@@ -104,6 +122,8 @@ body {
 .tweet {
     font-family: "Noto Sans", sans-serif;
     transform: translateY(-19px);
+    font-size: 1.06rem;
+    line-height: 1.3;
 }
 
 .tweet-user-info {
@@ -151,10 +171,6 @@ body {
 
 .retweeted {
     color:  #19cf86;
-}
-
-.comment-section {
-    /* display: none; */
 }
 
 .hide {

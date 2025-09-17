@@ -2,14 +2,10 @@ import { tweetData as data } from "/data.js"
 
 let tweetData = JSON.parse(localStorage.getItem('tweetData')) || data
 
-// variable 
-const tweetsAndCommentsContainer = document.getElementById("tweets-and-comments-container")
+// variables
 const tweetsContainer = document.getElementById('tweets-container')
-const commentsContainer = document.getElementById("comments-container")
 const tweetInput = document.getElementById("tweet-input")
 const tweetBtn = document.getElementById('tweet-btn')
-
-console.log(JSON.parse(localStorage.getItem("comment-section")))
 
 // handle document events
 document.addEventListener('click', (e)=> {
@@ -39,16 +35,16 @@ function getTweetsData(){
         tweets += `
             <div class="tweet-container">
                 <div class="tweet-user-info">
-                    <img src="./images/${profilePic}" alt="Image of ${handle}" class="profile-pic" loading = "lazy">
+                    <img src="./images/${profilePic}" alt="Image of ${handle}" class="profile-pic" width="48" height="48">
                     <p class="handle-p">${handle}</p>
                 </div>
                 <div class="tweet-feed">
                     <p class="tweet">${tweetText}</p>
                     <div class="tweet-feedback">
-                        <span><i class="fa-regular fa-comment-dots" data-comment=${uuid}></i>${replied.length}</span>
-                        <span><i class="fa-solid fa-heart ${isLiked && "liked"}" data-like=${uuid}></i>${likes}</span>
-                        <span><i class="fa-solid fa-retweet ${isRetweeted && "retweeted"}" data-retweet=${uuid}></i>${retweets}</span>
-                        ${isUser ? `<span><i class="fa-solid fa-trash" data-trash=${uuid}></i></span>` : ""}
+                        <span role="button" aria-label="comment"><i class="fa-regular fa-comment-dots" data-comment=${uuid}></i>${replied.length}</span>
+                        <span role="button" aria-label="like"><i class="fa-solid fa-heart ${isLiked && "liked"}" data-like=${uuid}></i>${likes}</span>
+                        <span role="button" aria-label="retweet"><i class="fa-solid fa-retweet ${isRetweeted && "retweeted"}" data-retweet=${uuid}></i>${retweets}</span>
+                        ${isUser ? `<span role="button" aria-label="delete-tweet"><i class="fa-solid fa-trash" data-trash=${uuid}></i></span>` : ""}
                     </div>
                 </div>
                 <div id="comment-section-${uuid}" class="comment-section ${isCommentHidden ? "hide" : ""}">
@@ -61,28 +57,31 @@ function getTweetsData(){
     return tweets
 }
 
+// user comment section
 function getComment(uuid){
-    return `<div class="comment">
-        <img src="./images/captainamerica.jpeg" class="profile-pic">
-        <input type="text" name="comment" placeholder="Write response..." autocomplete="off" class="comment-input">
-        <span id="comment-post-btn"><i class="fa-regular fa-paper-plane" data-post-comment=${uuid}></i></span>
-    </div>`
+    return `
+        <div class="comment">
+            <img src="./images/captainamerica.webp" alt="Avatar of user" class="profile-pic" width="48" height="48">
+            <input type="text" name="comment" placeholder="Write response..." autocomplete="off" class="comment-input">
+            <span role="button" aria-label="post-comment" id="comment-post-btn" class="post-comment-${uuid}"><i class="fa-regular fa-paper-plane" data-post-comment=${uuid}></i></span>
+        </div>`
 }
 
+// get user reply on specific tweet
 function getReply(reply){
     const {handle, isCommented, profilePic, tweetText, likes, uuid, isLiked} = reply
 
     return `
     <div class="comment-container">
         <div class="tweet-user-info">
-            <img src="./images/${profilePic}" alt="Image of${handle}" class="profile-pic">
+            <img src="./images/${profilePic}" alt="Image of${handle}" class="profile-pic" width="48" height="48">
             <p class="handle-p">${handle}</p>
         </div>
         <div class="tweet-feed">
             <p class="tweet">${tweetText}</p>
             <div class="tweet-feedback">
-                <span><i class="fa-solid fa-heart ${isLiked && "liked"}" data-comment-like=${uuid}></i>${likes}</span>     
-                ${isCommented ? `<span><i class="fa-solid fa-trash" data-comment-trash=${uuid}></i></span>` : ""}
+                <span role="button" aria-label="like"><i class="fa-solid fa-heart ${isLiked && "liked"}" data-comment-like=${uuid}></i>${likes}</span>     
+                ${isCommented ? `<span role="button" aria-label="delete-comment"><i class="fa-solid fa-trash" data-comment-trash=${uuid}></i></span>` : ""}
             </div>
         </div>
     </div>`    
@@ -90,16 +89,35 @@ function getReply(reply){
 
 getTweetsData()
 
+// rendering tweet
 function renderTweet(){
     tweetsContainer.innerHTML = getTweetsData()
 }
 
 renderTweet()
 
-const handleLikeClick = function(id){ 
-    const likeEl = tweetData.filter( tweet => {
-        return tweet.uuid === id.dataset.like
+// functions to find the clicked elements
+
+function findClickedTweet(id){
+    const clickedElement = tweetData.filter(tweet => {
+        return tweet.uuid === id
     })[0]
+
+    return clickedElement
+}
+
+function findRepliedTweets(id){
+    for(const tweet of tweetData){
+        if(tweet.replied.length > 0){
+            let reply = tweet.replied.find(reply => reply.uuid.toString() === id)
+            if(reply) return reply
+        }
+    }
+    return null
+}
+
+const handleLikeClick = function(clickedEl){ 
+    const likeEl = findClickedTweet(clickedEl.dataset.like)
 
     if(likeEl.isLiked){
         likeEl.likes--;
@@ -114,10 +132,8 @@ const handleLikeClick = function(id){
 }
 
 
-const handleRetweetClick = function(id){
-    const retweetEl = tweetData.filter( tweet => {
-        return tweet.uuid === id.dataset.retweet
-    })[0]
+const handleRetweetClick = function(clickedEl){
+    const retweetEl = findClickedTweet(clickedEl.dataset.retweet)
 
     if(retweetEl.isRetweeted){
         retweetEl.retweets--
@@ -131,67 +147,63 @@ const handleRetweetClick = function(id){
     renderTweet()
 }
 
-const handleCommentClick = function(id){
-    tweetData.forEach( comment => {
-        if(comment.uuid === id.dataset.comment){
-            document.getElementById(`comment-section-${comment.uuid}`).classList.toggle("hide")   
-            localStorage.setItem(`comment-section-${id.dataset.comment}`, JSON.stringify(document.getElementById(`comment-section-${id.dataset.comment}`).classList.contains("hide")))
-        }
-    })
+const handleCommentClick = function(clickedEl){
+    const comment = findClickedTweet(clickedEl.dataset.comment)
+    const commentSection = document.getElementById(`comment-section-${clickedEl.dataset.comment}`)
+
+    document.getElementById(`comment-section-${comment.uuid}`).classList.toggle("hide")   
+    localStorage.setItem(`comment-section-${clickedEl.dataset.comment}`, JSON.stringify(commentSection.classList.contains("hide")))
 }
 
-const handleCommentLikeClick = function(id){ 
-    tweetData.forEach(tweet => {
-        tweet.replied.forEach(item => {
-            if(item.uuid === id.dataset.commentLike){
-                if(item.isLiked){
-                    item.likes--;
-                    item.isLiked = false
-                } else {  
-                    item.likes++
-                    item.isLiked = true
-                }
-            }
-        })
-    })
+const handleCommentLikeClick = function(clickedEl){     
+    let commentLikeClicked = findRepliedTweets(clickedEl.dataset.commentLike)
+
+    if(commentLikeClicked.isLiked){
+        commentLikeClicked.likes--;
+        commentLikeClicked.isLiked = false
+    } else {  
+        commentLikeClicked.likes++
+        commentLikeClicked.isLiked = true
+    }
 
     saveToLocalStorage()
     renderTweet()
 }
 
-const handlePostCommentClick = function(id){
-    // ensuring clicked element uuid
-    const clickedEl = tweetData.filter(tweet => {
-        return tweet.uuid === id.dataset.postComment
-    })[0]
+const handlePostCommentClick = function(clickedEl){
+    const clickedElement = findClickedTweet(clickedEl.dataset.postComment)
+    
+    const commentInput = document.querySelector(`.post-comment-${clickedEl.dataset.postComment}`).previousElementSibling
 
-    // ensuring input is empty
-    const commentInputs = document.getElementsByClassName("comment-input")
-    const input = Array.from(commentInputs).filter( input => {
-        return input.value !== ""
-    })[0]
+    // checking if comment not already posted
+    let isEqual = false
+    clickedElement.replied.forEach(reply => {
+          isEqual = reply.tweetText === commentInput.value
+    })
 
     // adding comment to the comments array
-    clickedEl.replied.unshift({
-        handle: "@captainamerica",
-        profilePic: "captainamerica.jpeg",
-        tweetText: input.value,
-        likes: 0,
-        isLiked: false,
-        isUser: false,
-        isCommented: true,
-        uuid: crypto.randomUUID()
-    })
-
+    if(commentInput.value !== "" && !isEqual){
+        clickedElement.replied.unshift({
+            handle: "@captainamerica",
+            profilePic: "captainamerica.webp",
+            tweetText: commentInput.value,
+            likes: 0,
+            isLiked: false,
+            isUser: false,
+            isCommented: true,
+            uuid: crypto.randomUUID()
+        })
+    }
+    
     saveToLocalStorage()
-    // re-rendering the DOM
     renderTweet()
 }
 
-const handleCommentTrash = function(id){
+// function to delete user comments
+const handleCommentTrash = function(clickedEl){
     tweetData.forEach(tweet => {
         tweet.replied.forEach( item => {
-            if(item.uuid === id.dataset.commentTrash){
+            if(item.uuid === clickedEl.dataset.commentTrash){
                 tweet.replied.shift()
 
                 saveToLocalStorage()
@@ -202,8 +214,9 @@ const handleCommentTrash = function(id){
 
 }
 
-const handleTrashClick = function(id){
-    let index = tweetData.findIndex( tweet => tweet.uuid === id.dataset.trash)
+// function to delete user tweets
+const handleTrashClick = function(clickedEl){
+    let index = tweetData.findIndex( tweet => tweet.uuid === clickedEl.dataset.trash)
 
     // removing the tweet from the data
     if(index > -1){
@@ -213,15 +226,16 @@ const handleTrashClick = function(id){
     }
 }
 
+// event listener to post tweet
 tweetBtn.addEventListener('click', ()=> {
-    const tweets = tweetData.map(tweet => {
+    const tweets = tweetData.filter(tweet => {
         return tweet.tweetText
     })
 
     if(!tweets.includes(tweetInput.value) && tweetInput.value !== ""){
         tweetData.unshift({
             handle: "@captainamerica",
-            profilePic: "captainamerica.jpeg",
+            profilePic: "captainamerica.webp",
             tweetText: tweetInput.value,
             replied: [],
             likes: 0,
@@ -236,5 +250,4 @@ tweetBtn.addEventListener('click', ()=> {
         renderTweet()  
         tweetInput.value = ""
     }
-    
 })
