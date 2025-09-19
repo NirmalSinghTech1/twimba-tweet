@@ -99,7 +99,6 @@ body {
 
 /* Tweets styling */
 .tweet-container {
-    /* background-color: gray; */
     color: var(--font-color);
     border-top: 1px solid gray;
     margin-top: 1em;
