@@ -35,7 +35,7 @@ function getTweetsData(){
         tweets += `
             <div class="tweet-container">
                 <div class="tweet-user-info">
-                    <img src="./images/${profilePic}" alt="Image of ${handle}" class="profile-pic" width="48" height="48">
+                    <img src="./images/${profilePic}" alt="Image of ${handle}" class="profile-pic" width="48" height="46">
                     <p class="handle-p">${handle}</p>
                 </div>
                 <div class="tweet-feed">

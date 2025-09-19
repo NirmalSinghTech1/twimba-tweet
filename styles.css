@@ -2,21 +2,18 @@
     font-family: "Permanent Marker";
     src: url("./fonts/permanentmarker-regular-webfont.woff2") format("woff2");
     src: url("./fonts/permanentmarker-regular-webfont.woff") format("woff");
-    font-display: swap;
 }
 
 @font-face {
     font-family: "Noto Sans", sans-serif;;
     src: url("./fonts/notosans-variablefont_wdthwght-webfont.woff2") format("woff2");
     src: url("./fonts/notosans-variablefont_wdthwght-webfont.woff") format("woff");
-    font-display: swap;
 }
 @font-face {
     font-family: "Noto Sans", sans-serif;;
     src: url("./fonts/notosans-variablefont_wdthwght-webfont.woff2") format("woff2");
     src: url("./fonts/notosans-variablefont_wdthwght-webfont.woff") format("woff");
     font-weight: 600;
-    font-display: swap;
 }
 
 
@@ -58,10 +55,9 @@ body {
 }
 
 .profile-pic {
-    width: 50px;
+    max-width: 100%;
     border-radius: 50%;
     border: 0.5px solid white;
-    /* filter: drop-shadow(0 2px 2px rgba(255,255,255,0.2)); */
 }
 
 .tweet-input {
